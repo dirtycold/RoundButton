@@ -73,6 +73,26 @@ Qt::AlignmentFlag RoundButton::alignment() const
     return m_alignment;
 }
 
+bool RoundButton::event(QEvent *event)
+{
+    switch(event->type())
+    {
+    case QEvent::MouseButtonRelease:
+        {
+            const QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent *> (event);
+            bool inside = rect ().contains (mouseEvent->pos ());
+            if ((mouseEvent->button () == Qt::LeftButton) && inside)
+            {
+                emit clicked ();
+            }
+        }
+        break;
+    default:
+        break;
+    }
+    return QWidget::event (event);
+}
+
 void RoundButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED (event);

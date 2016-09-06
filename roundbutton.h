@@ -26,7 +26,11 @@ public:
     void setAlignment (Qt::AlignmentFlag alignment);
     Qt::AlignmentFlag alignment () const;
 
+signals:
+    void clicked ();
+
 protected:
+    bool event(QEvent * event);
     void paintEvent (QPaintEvent *event);
 
 private:

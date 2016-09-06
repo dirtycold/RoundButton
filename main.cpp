@@ -14,5 +14,7 @@ int main(int argc, char *argv[])
     w.setAlignment (Qt::AlignLeft);
     w.show();
 
+    QObject::connect (&w, &RoundButton::clicked, &a, &QApplication::quit);
+
     return a.exec();
 }
