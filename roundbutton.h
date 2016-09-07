@@ -8,6 +8,14 @@ class RoundButton : public QWidget
     Q_OBJECT
 
 public:
+    enum AlignMode
+    {
+        AlignCenter = 0x0,
+        AlignLeft   = 0x1,
+        AlignRight  = 0x2,
+        AlignBoth   = AlignLeft | AlignRight,
+    };
+
     RoundButton(QWidget *parent = 0);
     ~RoundButton();
 
@@ -23,8 +31,8 @@ public:
     void setTextSizeRatio (const qreal ratio);
     qreal textSizeRatio () const;
 
-    void setAlignment (Qt::AlignmentFlag alignment);
-    Qt::AlignmentFlag alignment () const;
+    void setAlignment (AlignMode alignment);
+    AlignMode alignment () const;
 
 signals:
     void clicked ();
@@ -37,7 +45,7 @@ private:
     QColor m_color;
     QColor m_textColor;
     QString m_text;
-    Qt::AlignmentFlag m_alignment;
+    AlignMode m_alignment;
     qreal m_textSizeRatio;
 };
 

@@ -9,7 +9,7 @@ RoundButton::RoundButton(QWidget *parent)
     QPalette palette = this->palette ();
     m_color = palette.color (QPalette::Background);
     m_textColor = palette.color (QPalette::Foreground);
-    m_alignment = Qt::AlignHCenter;
+    m_alignment = AlignCenter;
     m_textSizeRatio = 1.0;
 }
 
@@ -58,17 +58,12 @@ qreal RoundButton::textSizeRatio() const
     return m_textSizeRatio;
 }
 
-void RoundButton::setAlignment(Qt::AlignmentFlag alignment)
+void RoundButton::setAlignment(AlignMode alignment)
 {
-    int horizontalAlignment = Qt::AlignLeft | Qt::AlignRight | Qt::AlignHCenter;
-    if (! (horizontalAlignment & alignment))
-    {
-        alignment = Qt::AlignHCenter;
-    }
     m_alignment = alignment;
 }
 
-Qt::AlignmentFlag RoundButton::alignment() const
+RoundButton::AlignMode RoundButton::alignment() const
 {
     return m_alignment;
 }
@@ -115,23 +110,18 @@ void RoundButton::paintEvent(QPaintEvent *event)
     painter.setBrush (QBrush (m_color));
     painter.drawRoundedRect (rect, radius, radius);
 
-    QRectF coverRect (rect);
-    switch (m_alignment)
+    if (m_alignment & AlignLeft)
     {
-    case Qt::AlignLeft:
-        {
-            coverRect.setRight (center.x ());
-            painter.drawRect (coverRect);
-        }
-        break;
-    case Qt::AlignRight:
-        {
-            coverRect.setLeft (center.x ());
-            painter.drawRect (coverRect);
-        }
-        break;
-    default:
-        break;
+        QRectF leftRect (rect);
+        leftRect.setRight (center.x ());
+        painter.drawRect (leftRect);
+    }
+
+    if (m_alignment & AlignRight)
+    {
+        QRectF rightRect (rect);
+        rightRect.setLeft (center.x ());
+        painter.drawRect (rightRect);
     }
 
     // dynamic font size derived from:

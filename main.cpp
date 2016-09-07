@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 //    w.setText ("Hello World.");
     w.setText ("= MENU");
     w.setTextSizeRatio (0.7);
-    w.setAlignment (Qt::AlignLeft);
+    w.setAlignment (RoundButton::AlignBoth);
     w.show();
 
     QObject::connect (&w, &RoundButton::clicked, &a, &QApplication::quit);
