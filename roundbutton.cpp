@@ -98,7 +98,7 @@ void RoundButton::paintEvent(QPaintEvent *event)
     Q_UNUSED (event);
 
     QPainter painter (this);
-    painter.setRenderHint (QPainter::Antialiasing);
+    painter.setRenderHints (QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     qreal height = this->height ();
     qreal width = this->width ();
@@ -152,5 +152,5 @@ void RoundButton::paintEvent(QPaintEvent *event)
 
     // test
     // painter.drawText (rect, Qt::AlignVCenter | m_alignment , m_text);
-    painter.drawText (rect, Qt::AlignCenter , m_text);
+    painter.drawText (rect, Qt::AlignCenter, m_text);
 }

@@ -15,12 +15,12 @@ int main(int argc, char *argv[])
 
     QString family (families.front ());
     QFont font (family);
-    QFont::insertSubstitution (family, "Roboto");
+    QFont::insertSubstitution (family, "Segoe UI");
     w.setFont (font);
 
 //    w.setText ("Hello World.");
     w.setText ("= MENU");
-    w.setTextSizeRatio (0.6);
+    w.setTextSizeRatio (0.7);
     w.setAlignment (Qt::AlignLeft);
     w.show();
 
