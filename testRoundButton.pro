@@ -16,3 +16,6 @@ SOURCES += main.cpp\
         roundbutton.cpp
 
 HEADERS  += roundbutton.h
+
+RESOURCES += \
+    resources.qrc

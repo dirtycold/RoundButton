@@ -1,15 +1,25 @@
 #include "roundbutton.h"
 #include <QApplication>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    int id = QFontDatabase::addApplicationFont (":/fonts/icon.ttf");
+    QStringList families = QFontDatabase::applicationFontFamilies (id);
+
     RoundButton w;
     w.setColor (QColor (80, 164, 201));
     w.setTextColor (Qt::white);
-    w.setFont (QFont ("Calibri"));
+
+    QString family (families.front ());
+    QFont font (family);
+    QFont::insertSubstitution (family, "Roboto");
+    w.setFont (font);
+
 //    w.setText ("Hello World.");
-    w.setText ("MENU");
+    w.setText ("= MENU");
     w.setTextSizeRatio (0.6);
     w.setAlignment (Qt::AlignLeft);
     w.show();
