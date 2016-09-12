@@ -10,7 +10,11 @@ RoundButton::RoundButton(QWidget *parent)
     m_color = palette.color (QPalette::Background);
     m_textColor = palette.color (QPalette::Foreground);
     m_alignment = AlignCenter;
+
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
     m_textSizeRatio = 1.0;
+#endif
+
 }
 
 RoundButton::~RoundButton()
@@ -48,6 +52,7 @@ QString RoundButton::text() const
     return m_text;
 }
 
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
 void RoundButton::setTextSizeRatio(const qreal ratio)
 {
     m_textSizeRatio = ratio;
@@ -57,6 +62,7 @@ qreal RoundButton::textSizeRatio() const
 {
     return m_textSizeRatio;
 }
+#endif // ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
 
 void RoundButton::setAlignment(AlignMode alignment)
 {
@@ -124,6 +130,7 @@ void RoundButton::paintEvent(QPaintEvent *event)
         painter.drawRect (rightRect);
     }
 
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
     // dynamic font size derived from:
     // For Qt 4.6.x, how to auto-size text to fit in a specified width?
     // http://stackoverflow.com/a/2204501
@@ -138,6 +145,8 @@ void RoundButton::paintEvent(QPaintEvent *event)
     factor *= m_textSizeRatio;
     font.setPointSizeF (font.pointSizeF () * factor);
     painter.setFont (font);
+#endif // ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
+
     painter.setPen (QPen (m_textColor));
 
     // test

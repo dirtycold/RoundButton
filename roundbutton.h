@@ -3,9 +3,21 @@
 
 #include <QWidget>
 
+#define ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
+#undef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
+
 class RoundButton : public QWidget
 {
     Q_OBJECT
+
+    Q_PROPERTY(QColor color READ color WRITE setColor)
+    Q_PROPERTY(QColor textColor READ textColor WRITE setTextColor)
+    Q_PROPERTY(QString text READ text WRITE setText)
+    Q_PROPERTY(AlignMode alignment READ alignment WRITE setAlignment)
+
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
+    Q_PROPERTY(qreal textSizeRatio READ textSizeRatio WRITE setTextSizeRatio)
+#endif
 
 public:
     enum AlignMode
@@ -15,6 +27,7 @@ public:
         AlignRight  = 0x2,
         AlignBoth   = AlignLeft | AlignRight,
     };
+    Q_DECLARE_FLAGS(AlignModes, AlignMode)
 
     RoundButton(QWidget *parent = 0);
     ~RoundButton();
@@ -28,11 +41,13 @@ public:
     void setText (const QString &text);
     QString text () const;
 
-    void setTextSizeRatio (const qreal ratio);
-    qreal textSizeRatio () const;
-
     void setAlignment (AlignMode alignment);
     AlignMode alignment () const;
+
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
+    void setTextSizeRatio (const qreal ratio);
+    qreal textSizeRatio () const;
+#endif
 
 signals:
     void clicked ();
@@ -46,7 +61,10 @@ private:
     QColor m_textColor;
     QString m_text;
     AlignMode m_alignment;
+
+#ifdef ROUNDBUTTON_USE_DYNAMIC_FONT_SIZE
     qreal m_textSizeRatio;
+#endif
 };
 
 #endif // ROUNDBUTTON_H
