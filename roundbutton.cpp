@@ -25,6 +25,7 @@ RoundButton::~RoundButton()
 void RoundButton::setColor(const QColor &color)
 {
     m_color = color;
+    update ();
 }
 
 QColor RoundButton::color() const
@@ -35,6 +36,7 @@ QColor RoundButton::color() const
 void RoundButton::setTextColor(const QColor &color)
 {
     m_textColor = color;
+    update ();
 }
 
 QColor RoundButton::textColor() const
@@ -45,6 +47,7 @@ QColor RoundButton::textColor() const
 void RoundButton::setText(const QString &text)
 {
     m_text = text;
+    update ();
 }
 
 QString RoundButton::text() const
@@ -56,6 +59,7 @@ QString RoundButton::text() const
 void RoundButton::setTextSizeRatio(const qreal ratio)
 {
     m_textSizeRatio = ratio;
+    update ();
 }
 
 qreal RoundButton::textSizeRatio() const
@@ -67,6 +71,7 @@ qreal RoundButton::textSizeRatio() const
 void RoundButton::setAlignment(AlignMode alignment)
 {
     m_alignment = alignment;
+    update ();
 }
 
 RoundButton::AlignMode RoundButton::alignment() const
